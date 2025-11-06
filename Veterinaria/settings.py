@@ -77,7 +77,7 @@ WSGI_APPLICATION = 'Veterinaria.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'adopciones_db',       # nombre de tu base de datos
+        'NAME': 'adopciones_bd',       # nombre de tu base de datos
         'USER': 'postgres',          # usuario de PostgreSQL
         'PASSWORD': '12345', # reemplaza con tu contraseña
         'HOST': 'localhost',         # o IP si es remoto
