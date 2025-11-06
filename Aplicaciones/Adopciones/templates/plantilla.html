@@ -1,0 +1,216 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Adopta con Amor</title>
+
+  <!-- Bootstrap Select -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta2/dist/css/bootstrap-select.min.css">
+
+  <!-- Favicons -->
+  <link href="{% static 'assets/img/favicon.png' %}" rel="icon" />
+  <link href="{% static 'assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon" />
+
+  <!-- jQuery y validaciones -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/jquery.validation/1.19.5/jquery.validate.min.js"></script>
+
+  <!-- iziToast -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/izitoast@1.4.0/dist/css/iziToast.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/izitoast@1.4.0/dist/js/iziToast.min.js"></script>
+
+  <!-- Fonts & Bootstrap -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
+
+  <style>
+    :root {
+      --color-primary: #4caf50;
+      --color-primary-dark: #388e3c;
+      --color-accent: #ff9800;
+      --color-accent-dark: #e65100;
+      --color-light: #f4f9f4;
+      --color-banner-bg: #000000aa;
+      --color-white: #fff;
+      --color-text-dark: #2e2e2e;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--color-light);
+      color: var(--color-text-dark);
+    }
+
+    header {
+      background-color: var(--color-primary);
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+
+    header a.nav-link,
+    header .navbar-brand span {
+      color: var(--color-white) !important;
+      font-weight: 600;
+    }
+
+    .btn-getstarted {
+      background-color: var(--color-accent);
+      color: white;
+      border-radius: 20px;
+      padding: 8px 24px;
+      font-weight: 700;
+      transition: 0.3s;
+    }
+
+    .btn-getstarted:hover {
+      background-color: var(--color-accent-dark);
+    }
+
+    .banner {
+      position: relative;
+      background-image: url("{% static 'assets/img/banner_mascotas.jpg' %}");
+      background-size: cover;
+      background-position: center;
+      height: 90vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      color: white;
+    }
+
+    .banner::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: var(--color-banner-bg);
+    }
+
+    .banner h1, .banner p {
+      position: relative;
+      z-index: 1;
+      text-shadow: 0 2px 6px rgba(0, 0, 0, 0.7);
+    }
+
+    footer {
+      background-color: var(--color-primary);
+      color: white;
+      text-align: center;
+      padding: 1rem;
+      font-weight: 600;
+    }
+
+    .pet-card {
+      transition: transform 0.3s, box-shadow 0.3s;
+      border-radius: 12px;
+    }
+
+    .pet-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 8px 20px rgba(76, 175, 80, 0.4);
+    }
+
+    .pet-card img {
+      border-top-left-radius: 12px;
+      border-top-right-radius: 12px;
+      height: 200px;
+      object-fit: cover;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <nav class="navbar navbar-expand-lg container navbar-dark">
+      <a class="navbar-brand d-flex align-items-center" href="{% url 'index' %}">
+        <img src="{% static 'assets/img/logo_mascotas.png' %}" alt="Logo Adopta con Amor" width="50" height="50" class="me-2 rounded-circle shadow-sm" />
+        <span>Adopta con Amor</span>
+      </a>
+      <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav align-items-center">
+          <li class="nav-item"><a class="nav-link" href="{% url 'index' %}"><i class="bi bi-house-heart-fill"></i> Inicio</a></li>
+          <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-people-fill"></i> Mascotas</a></li>
+          <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-calendar-heart-fill"></i> Eventos</a></li>
+          <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-envelope-fill"></i> Contacto</a></li>
+          <li class="nav-item ms-lg-3"><a href="{% url 'logout' %}" class="btn btn-outline-light btn-sm">Cerrar sesión</a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  {% block banner %}
+  <section class="banner">
+    <h1>Adopta, Ama y Cambia una Vida</h1>
+    <p>Brinda un hogar lleno de amor a una mascota que lo necesita.</p>
+  </section>
+  {% endblock %}
+
+  <main class="container py-5">
+    {% block contenido %}
+    <section class="text-center mb-5">
+      <h2 class="fw-bold text-success">Nuestras Mascotas en Adopción</h2>
+      <p class="text-muted">Encuentra a tu nuevo mejor amigo entre nuestros peludos rescatados 🐾</p>
+    </section>
+
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="card pet-card shadow-sm border-0">
+          <img src="{% static 'assets/img/perro1.jpg' %}" alt="Perro" class="card-img-top">
+          <div class="card-body text-center">
+            <h5 class="card-title text-success">Luna</h5>
+            <p class="card-text text-muted">Cariñosa y juguetona, busca un hogar donde reciba mucho amor.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card pet-card shadow-sm border-0">
+          <img src="{% static 'assets/img/gato1.jpg' %}" alt="Gato" class="card-img-top">
+          <div class="card-body text-center">
+            <h5 class="card-title text-success">Milo</h5>
+            <p class="card-text text-muted">Tranquilo y dormilón, ideal para familias amorosas.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card pet-card shadow-sm border-0">
+          <img src="{% static 'assets/img/perro2.jpg' %}" alt="Cachorro" class="card-img-top">
+          <div class="card-body text-center">
+            <h5 class="card-title text-success">Rocky</h5>
+            <p class="card-text text-muted">Leal y protector, espera una familia que lo adopte.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endblock %}
+  </main>
+
+  <footer>
+    <p>© 2025 Adopta con Amor | Desarrollado por Josselyn Quintana 🐾</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  {% if messages %}
+  <script>
+    {% for message in messages %}
+      iziToast.{{ message.tags }}({
+        title: '{{ message.tags|capfirst }}',
+        message: '{{ message|escapejs }}',
+        position: 'topRight'
+      });
+    {% endfor %}
+  </script>
+  {% endif %}
+</body>
+
+</html>

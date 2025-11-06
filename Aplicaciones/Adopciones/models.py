@@ -1,7 +1,5 @@
 from django.db import models
-
-
-# 🧍 Persona
+# Persona
 class Persona(models.Model):
     id_per = models.AutoField(primary_key=True)
     cedula_per = models.CharField(max_length=20, unique=True)
@@ -16,7 +14,7 @@ class Persona(models.Model):
         return f"{self.nombres_per} {self.apellidos_per}"
 
 
-# 🐶 Mascota
+#  Mascota
 class Mascota(models.Model):
     id_mas = models.AutoField(primary_key=True)
     nombre_mas = models.CharField(max_length=50)
