@@ -1,4 +1,6 @@
 from django.db import models
+
+# Create your models here.
 # Persona
 class Persona(models.Model):
     id_per = models.AutoField(primary_key=True)
@@ -30,7 +32,7 @@ class Mascota(models.Model):
         return f"{self.nombre_mas} ({self.especie_mas})"
 
 
-# 🐾 Adopción
+# Adopción
 class Adopcion(models.Model):
     id_ado = models.AutoField(primary_key=True)
     persona = models.ForeignKey(Persona, on_delete=models.CASCADE, related_name='adopciones')
@@ -43,4 +45,4 @@ class Adopcion(models.Model):
     def __str__(self):
         return f"Adopción #{self.id_ado} - {self.persona.nombres_per} adopta a {self.mascota.nombre_mas}"
 
-# Create your models here.
+
