@@ -47,3 +47,32 @@
     </div>
 </div>
 {% endblock %}
+
+{% block validacion_extra %}
+<script>
+document.getElementById('frm_registrar_persona').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    let errores = false;
+
+    const cedula = document.getElementById('cedula_per').value.trim();
+    const nombres = document.getElementById('nombres_per').value.trim();
+    const apellidos = document.getElementById('apellidos_per').value.trim();
+    const correo = document.getElementById('correo_per').value.trim();
+    const telefono = document.getElementById('telefono_per').value.trim();
+    const direccion = document.getElementById('direccion_per').value.trim();
+
+    if (!cedula) { iziToast.error({ title:'Error', message:'Cédula obligatoria', position:'topRight'}); errores = true; }
+    if (!nombres || nombres.length > 100) { iziToast.error({ title:'Error', message:'Nombres inválidos', position:'topRight'}); errores = true; }
+    if (!apellidos || apellidos.length > 100) { iziToast.error({ title:'Error', message:'Apellidos inválidos', position:'topRight'}); errores = true; }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!correo || !emailRegex.test(correo)) { iziToast.error({ title:'Error', message:'Correo inválido', position:'topRight'}); errores = true; }
+
+    if (telefono.length > 30) { iziToast.error({ title:'Error', message:'Teléfono demasiado largo', position:'topRight'}); errores = true; }
+    if (direccion.length > 200) { iziToast.error({ title:'Error', message:'Dirección demasiado larga', position:'topRight'}); errores = true; }
+
+    if (!errores) { this.submit(); }
+});
+</script>
+{% endblock %}
