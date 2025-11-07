@@ -2,3 +2,48 @@
 
 {% block header %}{% endblock %}
 {% block banner %}{% endblock %}
+
+{% block contenido %}
+<div class="container mt-5">
+    <h2 class="mb-4 text-center">Registrar Nuevo Cliente</h2>
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="card">
+                <div class="card-body">
+                    <form method="post" action="{% url 'nueva_persona' %}" id="frm_registrar_persona" novalidate>
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="cedula_per" class="form-label"><b>Cédula:</b></label>
+                            <input type="text" class="form-control" name="cedula_per" id="cedula_per" maxlength="20" placeholder="Ingrese la cédula" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="nombres_per" class="form-label"><b>Nombres:</b></label>
+                            <input type="text" class="form-control" name="nombres_per" id="nombres_per" maxlength="100" placeholder="Ingrese los nombres" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="apellidos_per" class="form-label"><b>Apellidos:</b></label>
+                            <input type="text" class="form-control" name="apellidos_per" id="apellidos_per" maxlength="100" placeholder="Ingrese los apellidos" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="correo_per" class="form-label"><b>Correo Electrónico:</b></label>
+                            <input type="email" class="form-control" name="correo_per" id="correo_per" placeholder="ejemplo@correo.com" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="telefono_per" class="form-label"><b>Teléfono:</b></label>
+                            <input type="text" class="form-control" name="telefono_per" id="telefono_per" maxlength="30" placeholder="Ingrese el teléfono">
+                        </div>
+                        <div class="mb-3">
+                            <label for="direccion_per" class="form-label"><b>Dirección:</b></label>
+                            <input type="text" class="form-control" name="direccion_per" id="direccion_per" maxlength="200" placeholder="Ingrese la dirección">
+                        </div>
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-outline-success">Guardar</button>
+                            <a href="{% url 'listar_persona' %}" class="btn btn-outline-secondary">Cancelar</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
