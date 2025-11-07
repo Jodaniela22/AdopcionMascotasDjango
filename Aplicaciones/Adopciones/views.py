@@ -6,7 +6,7 @@ from .models import Persona, Mascota, Adopcion
 def index(request):
     return render(request, 'index.html')
 
-# Crear nueva persona
+
 def nueva_persona(request):
     if request.method == 'POST':
         cedula = request.POST.get('cedula_per', '').strip()
@@ -36,13 +36,13 @@ def nueva_persona(request):
     return render(request, 'persona/nueva_persona.html')
 
 
-# Listar personas
+
 def listar_persona(request):
     personas = Persona.objects.all()
     return render(request, 'persona/listar_persona.html', {'personas': personas})
 
 
-# Editar persona
+
 def editar_persona(request, id_per):
     persona = get_object_or_404(Persona, pk=id_per)
 
@@ -73,7 +73,7 @@ def editar_persona(request, id_per):
     return render(request, 'persona/editar_persona.html', {'persona': persona})
 
 
-# Eliminar persona
+
 def eliminar_persona(request, id_per):
     persona = get_object_or_404(Persona, pk=id_per)
     try:
@@ -114,12 +114,12 @@ def nueva_mascota(request):
 
     return render(request, 'mascota/nueva_mascota.html')
 
-# Listar
+
 def listar_mascota(request):
     mascotas = Mascota.objects.all()
     return render(request, 'mascota/listar_mascota.html', {'mascotas': mascotas})
 
-# Editar
+
 def editar_mascota(request, id):
     mascota = get_object_or_404(Mascota, pk=id)
 
@@ -151,7 +151,7 @@ def editar_mascota(request, id):
 
     return render(request, 'mascota/editar_mascota.html', {'mascota': mascota})
 
-# Eliminar
+
 def eliminar_mascota(request, id):
     mascota = get_object_or_404(Mascota, pk=id)
     try:
@@ -183,7 +183,6 @@ def nueva_adopcion(request):
                     estado_ado=estado,
                     documento_ado=documento
                 )
-                # Cambiar estado de la mascota a "En Adopción" para que no aparezca en otras solicitudes
                 mascota.estado_mas = 'En Adopción'
                 mascota.save()
                 messages.success(request, "Adopción registrada correctamente.")
@@ -195,12 +194,12 @@ def nueva_adopcion(request):
 
     return render(request, 'adopcion/nueva_adopcion.html', {'personas': personas, 'mascotas': mascotas})
 
-# Listar
+
 def listar_adopcion(request):
     adopciones = Adopcion.objects.select_related('persona', 'mascota').all()
     return render(request, 'adopcion/listar_adopcion.html', {'adopciones': adopciones})
 
-# Editar
+
 def editar_adopcion(request, id):
     adopcion = get_object_or_404(Adopcion, pk=id)
     personas = Persona.objects.all()
@@ -228,11 +227,10 @@ def editar_adopcion(request, id):
 
     return render(request, 'adopcion/editar_adopcion.html', {'adopcion': adopcion, 'personas': personas, 'mascotas': mascotas})
 
-# Eliminar
+
 def eliminar_adopcion(request, id):
     adopcion = get_object_or_404(Adopcion, pk=id)
     try:
-        # Cambiar estado de la mascota si se elimina la adopción
         mascota = adopcion.mascota
         mascota.estado_mas = 'Disponible'
         mascota.save()
