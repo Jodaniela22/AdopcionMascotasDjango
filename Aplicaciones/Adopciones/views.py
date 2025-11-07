@@ -183,6 +183,7 @@ def nueva_adopcion(request):
                     estado_ado=estado,
                     documento_ado=documento
                 )
+                
                 mascota.estado_mas = 'En Adopción'
                 mascota.save()
                 messages.success(request, "Adopción registrada correctamente.")
