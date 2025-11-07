@@ -137,10 +137,22 @@
       <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
         <ul class="navbar-nav align-items-center">
           <li class="nav-item"><a class="nav-link" href="{% url 'index' %}"><i class="bi bi-house-heart-fill"></i> Inicio</a></li>
-          <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-people-fill"></i> Mascotas</a></li>
+          <li class="nav-item">
+    <a class="nav-link" href="{% url 'nueva_persona' %}">
+        <i class="bi bi-people-fill"></i> Personas
+    </a>
+
+     <a class="nav-link" href="{% url 'nueva_mascota' %}">
+        <i class="bi bi-people-fill"></i> Mascotas
+    </a>
+    <a class="nav-link" href="{% url 'nueva_adopcion' %}">
+        <i class="bi bi-people-fill"></i> Adopciones
+    </a>
+</li>
+
           <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-calendar-heart-fill"></i> Eventos</a></li>
           <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-envelope-fill"></i> Contacto</a></li>
-          <li class="nav-item ms-lg-3"><a href="{% url 'logout' %}" class="btn btn-outline-light btn-sm">Cerrar sesión</a></li>
+         
         </ul>
       </div>
     </nav>

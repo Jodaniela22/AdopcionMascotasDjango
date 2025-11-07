@@ -1,0 +1,42 @@
+{% extends "plantilla.html" %}
+
+{% block banner %}
+<!-- Vacío para no mostrar la imagen en esta vista -->
+{% endblock %}
+
+{% block contenido %}
+<div class="container mt-5">
+    <h2 class="mb-4 text-center">Editar Persona</h2>
+    <form method="post" action="{% url 'editar_persona' persona.id_per %}" novalidate>
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="cedula_per" class="form-label"><b>Cédula:</b></label>
+            <input type="text" class="form-control" name="cedula_per" id="cedula_per" value="{{ persona.cedula_per }}" maxlength="20" placeholder="Ingrese la cédula" required>
+        </div>
+        <div class="mb-3">
+            <label for="nombres_per" class="form-label"><b>Nombres:</b></label>
+            <input type="text" class="form-control" name="nombres_per" id="nombres_per" value="{{ persona.nombres_per }}" maxlength="100" placeholder="Ingrese los nombres" required>
+        </div>
+        <div class="mb-3">
+            <label for="apellidos_per" class="form-label"><b>Apellidos:</b></label>
+            <input type="text" class="form-control" name="apellidos_per" id="apellidos_per" value="{{ persona.apellidos_per }}" maxlength="100" placeholder="Ingrese los apellidos" required>
+        </div>
+        <div class="mb-3">
+            <label for="telefono_per" class="form-label"><b>Teléfono:</b></label>
+            <input type="text" class="form-control" name="telefono_per" id="telefono_per" value="{{ persona.telefono_per }}" maxlength="30" placeholder="Ingrese el número de teléfono">
+        </div>
+        <div class="mb-3">
+            <label for="correo_per" class="form-label"><b>Correo Electrónico:</b></label>
+            <input type="email" class="form-control" name="correo_per" id="correo_per" value="{{ persona.correo_per }}" maxlength="100" placeholder="ejemplo@correo.com" required>
+        </div>
+        <div class="mb-3">
+            <label for="direccion_per" class="form-label"><b>Dirección:</b></label>
+            <input type="text" class="form-control" name="direccion_per" id="direccion_per" value="{{ persona.direccion_per }}" maxlength="200" placeholder="Ingrese la dirección">
+        </div>
+        <div class="d-grid gap-2">
+            <button type="submit" class="btn btn-outline-success">Actualizar</button>
+            <a href="{% url 'listar_persona' %}" class="btn btn-outline-success">Cancelar</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

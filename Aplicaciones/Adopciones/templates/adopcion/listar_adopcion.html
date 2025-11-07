@@ -1,0 +1,74 @@
+{% extends "plantilla.html" %}
+{% block banner %}{% endblock %}
+{% block contenido %}
+<link rel="stylesheet" href="//cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" />
+<div class="container mt-5">
+    <h2 class="mb-4 text-center">Listado de Adopciones</h2>
+    <a href="{% url 'nueva_adopcion' %}" class="btn btn-success mb-3">+ Nueva Adopción</a>
+    <table class="table table-bordered table-striped table-hover text-center" id="tabla-adopciones">
+        <thead class="table-dark">
+            <tr>
+                <th>ID</th>
+                <th>Persona</th>
+                <th>Mascota</th>
+                <th>Fecha Solicitud</th>
+                <th>Fecha Aprobación</th>
+                <th>Estado</th>
+                <th>Documento</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for a in adopciones %}
+            <tr>
+                <td>{{ a.id_ado }}</td>
+                <td>{{ a.persona.nombres_per }} {{ a.persona.apellidos_per }}</td>
+                <td>{{ a.mascota.nombre_mas }} ({{ a.mascota.especie_mas }})</td>
+                <td>{{ a.fecha_solicitud_ado }}</td>
+                <td>{{ a.fecha_aprobacion_ado|default:"-" }}</td>
+                <td>{{ a.estado_ado }}</td>
+                <td>{{ a.documento_ado|default:"-" }}</td>
+                <td>
+                    <a href="{% url 'editar_adopcion' a.id_ado %}" class="btn btn-outline-success">Editar</a>
+                    <a href="javascript:void(0)" onclick="eliminarAdopcion('{% url 'eliminar_adopcion' a.id_ado %}');" class="btn btn-outline-success">Eliminar</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="8">No hay adopciones registradas.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<script src="//cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<script>
+  $(document).ready(function() {
+    $('#tabla-adopciones').DataTable();
+  });
+
+  function eliminarAdopcion(url){
+      iziToast.question({
+          timeout: 15000,
+          close: true,
+          overlay: true,
+          displayMode: 'once',
+          id: 'question',
+          zindex: 999,
+          title: 'CONFIRMACIÓN',
+          message: '¿Está seguro de eliminar esta adopción?',
+          position: 'center',
+          buttons: [
+              ['<button><b>SI</b></button>', function (instance, toast) {
+                  instance.hide({ transitionOut: 'fadeOut' }, toast, 'button');
+                  window.location.href = url;
+              }, true],
+              ['<button>NO</button>', function (instance, toast) {
+                  instance.hide({ transitionOut: 'fadeOut' }, toast, 'button');
+              }],
+          ]
+      });
+  }
+</script>
+{% endblock %}

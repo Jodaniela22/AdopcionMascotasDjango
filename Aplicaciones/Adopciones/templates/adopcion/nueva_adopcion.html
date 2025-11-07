@@ -1,0 +1,40 @@
+{% extends "plantilla.html" %}
+{% block banner %}{% endblock %}
+{% block contenido %}
+<div class="container mt-5">
+    <h2 class="mb-4 text-center">Registrar Nueva Adopción</h2>
+    <form method="post" novalidate>
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="persona" class="form-label"><b>Persona:</b></label>
+            <select class="form-control" name="persona" id="persona" required>
+                <option value="">-- Seleccione una persona --</option>
+                {% for p in personas %}
+                <option value="{{ p.id_per }}">{{ p.nombres_per }} {{ p.apellidos_per }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="mascota" class="form-label"><b>Mascota:</b></label>
+            <select class="form-control" name="mascota" id="mascota" required>
+                <option value="">-- Seleccione una mascota --</option>
+                {% for m in mascotas %}
+                <option value="{{ m.id_mas }}">{{ m.nombre_mas }} ({{ m.especie_mas }})</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="estado" class="form-label"><b>Estado:</b></label>
+            <input type="text" class="form-control" name="estado" id="estado" value="Solicitada">
+        </div>
+        <div class="mb-3">
+            <label for="documento" class="form-label"><b>Documento:</b></label>
+            <textarea class="form-control" name="documento" id="documento" rows="3"></textarea>
+        </div>
+        <div class="d-grid gap-2">
+            <button type="submit" class="btn btn-outline-success">Guardar</button>
+            <a href="{% url 'listar_adopcion' %}" class="btn btn-outline-success">Cancelar</a>
+        </div>
+    </form>
+</div>
+{% endblock %}
